@@ -1,0 +1,15 @@
+{
+  "extends": "standard",
+  "rules": {
+    "space-before-function-paren": [ 0, "never" ]
+  },
+  "env": {
+    "mocha": true
+  },
+  "globals": {
+    "config": true,
+    "expect": true,
+    "httpTest": true,
+    "storeTest": true
+  }
+}
