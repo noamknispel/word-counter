@@ -6,10 +6,10 @@ describe('Words Manager', function() {
       { title: 'clear extra spaces', input: '    this is the best word counter    ever' },
       { title: 'make everything lower case', input: 'This is the BEST Word Counter ever' },
       { title: 'remove punctuation', input: 'this is the best word-counter ever!!!' }
-    ].map((testCase) => {
-      it(testCase.title, function() {
-        const wordsManager = new WordsManager(testCase.input)
-        expect(wordsManager.getArrayOfWords())
+    ].map(({ title, input }) => {
+      it(title, function() {
+        const wordsManager = new WordsManager()
+        expect(wordsManager.getArrayOfWords(input))
           .to.eql(['this', 'is', 'the', 'best', 'word', 'counter', 'ever'])
       })
     })

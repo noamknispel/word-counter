@@ -14,5 +14,5 @@
 
 **Path** | **Params** | **Description**
 --- | --- | --- | ---
-[POST] /api/words | `{ "input": "STRING" }` | Send text and store the counts
+[POST] /api/words | `{ "text": "STRING" }` | Send text and store the counts
 [GET] /api/words/:WORD | `:WORD = 'foo'` | Get statistic of how many times the word appeared

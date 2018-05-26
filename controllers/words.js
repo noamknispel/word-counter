@@ -1,13 +1,17 @@
 const WordsManager = require('./../lib/words_manager')
+const _ = require('lodash')
 
 module.exports = {
   async create(ctx, next) {
-    const { input } = ctx.request.body
-    if (!input) {
+    const filePath = _.get(ctx.request, 'files.file.path')
+    const { text } = ctx.request.body
+
+    if (!text && !filePath) {
       ctx.status = 400
       return
     }
 
+    const input = { text, filePath }
     const wordsManager = new WordsManager(input)
     await wordsManager.insert()
     ctx.status = 204

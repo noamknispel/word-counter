@@ -5,13 +5,13 @@ describe('Words Controller', function() {
 
   describe('create', function() {
     it('works for string', async function() {
-      await httpTest.post(URL).send({ input: 'Donald Trump' })
+      await httpTest.post(URL).send({ text: 'Donald Trump' })
       const result = await storeTest.getAsync('donald')
       expect(result).to.eql('1')
     })
 
     it('return 400 if no input', async function() {
-      const response = await httpTest.post(URL).send({ input: '' })
+      const response = await httpTest.post(URL).send({ text: '' })
       expect(response.status).to.eql(400)
     })
   })
