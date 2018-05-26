@@ -3,7 +3,7 @@ const StringType = require('./../../lib/types/string')
 const FileType = require('./../../lib/types/file')
 const UrlType = require('./../../lib/types/url')
 
-describe('Type factory', function() {
+describe('Type Factory', function() {
   describe('getDataObject', function() {
     it('return string type', function() {
       const dataObject = typeFactory.getDataObject({ text: 'supercalifragilisticexpialidocious' })

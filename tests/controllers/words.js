@@ -19,7 +19,7 @@ describe('Words Controller', function() {
 
     describe('url', function() {
       it('save words count', async function() {
-        // TODO: Change it to local request...
+        // TODO: run local server and send the request in close environment
         await httpTest.post(URL).send({ url: config.testUrl })
         const count = await storeTest.getAsync('ipsum')
         expect(count).to.eql('1')
@@ -33,14 +33,14 @@ describe('Words Controller', function() {
 
     describe('file', function() {
       it('save words count', async function() {
-        // TODO: I had to keep the file outsite the tests directory becuase...
+        // The test file is placed not inside the tests dirctory because bug in mocha excluding
         await httpTest.post(URL).attach('file', `${__dirname}/../../testfile.txt`, 'testfile.txt')
 
         const count = await storeTest.getAsync('hey')
         expect(count).to.eql('1')
       })
 
-      it('return 400 if url is empty', async function() {
+      it('return 400 if filePath is empty', async function() {
         const response = await httpTest.post(URL).attach('file', '', 'nothing.txt')
         expect(response.status).to.eql(400)
       })

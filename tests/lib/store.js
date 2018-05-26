@@ -1,8 +1,9 @@
 const Store = require('./../../lib/store')
 const store = new Store()
 
-describe('store', function() {
+describe('Store', function() {
   beforeEach(async () => storeTest.flushdbAsync())
+
   describe('insert', function() {
     it('insert one item', async function() {
       await store.insert(['rick'])

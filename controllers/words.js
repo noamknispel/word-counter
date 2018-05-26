@@ -19,7 +19,7 @@ module.exports = {
 
   async find(ctx, next) {
     const { word } = ctx.params
-    // Assumption: no need validation here, the router will catch it
+    // Assumption: no need validation here, the router will catch it anyway
 
     const model = new Model(word)
     const count = await model.getCount()

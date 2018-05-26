@@ -1,6 +1,6 @@
 const StringType = require('./../../../lib/types/string')
 
-describe('string', function() {
+describe('String', function() {
   describe('getContent', function() {
     it('return string content', async function() {
       const inputString = 'you killed my father'
