@@ -1,10 +1,9 @@
 {
   "name": "word-counter",
   "version": "1.0.0",
-  "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "mocha tests/init.js tests/* --exit"
+    "test": "mocha tests/init.js tests/*/* --exit"
   },
   "author": "Noam Knispel",
   "dependencies": {
@@ -14,6 +13,7 @@
     "koa-router": "^7.4.0",
     "koa2-formidable": "^1.0.2",
     "lodash": "^4.17.10",
+    "node-fetch": "^2.1.2",
     "redis": "^2.8.0"
   },
   "devDependencies": {

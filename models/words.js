@@ -1,16 +1,16 @@
-const sourcesManager = require('./sources_manager')
-const Store = require('./store')
+const typeFactory = require('./../lib/type_factory')
+const Store = require('./../lib/store')
 const _ = require('lodash')
 
-module.exports = class {
+module.exports = class WordsModel {
   constructor(input) {
     this.input = input
     this.store = new Store()
   }
 
   async insert() {
-    const data = sourcesManager.getDataObject(this.input)
-    const toInsert = this.getArrayOfWords(data.getWords())
+    const data = typeFactory.getDataObject(this.input)
+    const toInsert = this.getArrayOfWords(await data.getContent())
     await this.store.insert(toInsert)
   }
 
@@ -19,7 +19,7 @@ module.exports = class {
     return _.words(_.lowerCase(text))
   }
 
-  getCount() {
+  async getCount() {
     return this.store.getCount(this.input)
   }
 }

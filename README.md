@@ -2,17 +2,9 @@
 #### By Noam Knispel
 ---
 
-## Thoughts:
-- *bulk?*
-- trim
-- remove punctuation
-- lower case
-- save count for result
-- redis `incr` by word
-
 ## APIs
 
-**Path** | **Params** | **Description**
---- | --- | --- | ---
-[POST] /api/words | `{ "text": "STRING" }` | Send text and store the counts
-[GET] /api/words/:WORD | `:WORD = 'foo'` | Get statistic of how many times the word appeared
+**Path** | **Params** | **Description** | **Example**
+--- | --- | --- | --- | ---
+[POST] /api/words | `text` - for string <br /> `url` - for URL fetching | Send text and store the counts | `{ "text": "STRING" }`
+[GET] /api/words/:WORD | `word` | Get statistic of how many times the word appeared | `/api/words/something`

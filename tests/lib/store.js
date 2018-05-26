@@ -4,14 +4,13 @@ const store = new Store()
 describe('store', function() {
   beforeEach(async () => storeTest.flushdbAsync())
   describe('insert', function() {
-    // TODO: testcases
     it('insert one item', async function() {
       await store.insert(['rick'])
       const count = await storeTest.getAsync('rick')
       expect(count).to.eql('1')
     })
 
-    it('inser multiple items', async function() {
+    it('insert multiple items', async function() {
       const counts = []
       await store.insert(['rick', 'morty'])
 

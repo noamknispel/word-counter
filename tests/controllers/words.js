@@ -4,15 +4,46 @@ describe('Words Controller', function() {
   beforeEach(async () => storeTest.flushdbAsync())
 
   describe('create', function() {
-    it('works for string', async function() {
-      await httpTest.post(URL).send({ text: 'Donald Trump' })
-      const result = await storeTest.getAsync('donald')
-      expect(result).to.eql('1')
+    describe('string', function() {
+      it('save words count', async function() {
+        await httpTest.post(URL).send({ text: 'Donald Trump' })
+        const count = await storeTest.getAsync('donald')
+        expect(count).to.eql('1')
+      })
+
+      it('return 400 if string is empty', async function() {
+        const response = await httpTest.post(URL).send({ text: '' })
+        expect(response.status).to.eql(400)
+      })
     })
 
-    it('return 400 if no input', async function() {
-      const response = await httpTest.post(URL).send({ text: '' })
-      expect(response.status).to.eql(400)
+    describe('url', function() {
+      it('save words count', async function() {
+        // TODO: Change it to local request...
+        await httpTest.post(URL).send({ url: config.testUrl })
+        const count = await storeTest.getAsync('ipsum')
+        expect(count).to.eql('1')
+      })
+
+      it('return 400 if url is empty', async function() {
+        const response = await httpTest.post(URL).send({ url: '' })
+        expect(response.status).to.eql(400)
+      })
+    })
+
+    describe('file', function() {
+      it('save words count', async function() {
+        // TODO: I had to keep the file outsite the tests directory becuase...
+        await httpTest.post(URL).attach('file', `${__dirname}/../../testfile.txt`, 'testfile.txt')
+
+        const count = await storeTest.getAsync('hey')
+        expect(count).to.eql('1')
+      })
+
+      it('return 400 if url is empty', async function() {
+        const response = await httpTest.post(URL).attach('file', '', 'nothing.txt')
+        expect(response.status).to.eql(400)
+      })
     })
   })
 
@@ -24,10 +55,10 @@ describe('Words Controller', function() {
       { title: 'return zero for not existing word', word: 'hillary', expected: '0' }
     ]
 
-    testCases.map((testCase) => {
-      it(testCase.title, async function() {
-        const response = await httpTest.get(`${URL}/${testCase.word}`)
-        expect(response.text).to.eql(testCase.expected)
+    testCases.map(({ title, word, expected }) => {
+      it(title, async function() {
+        const response = await httpTest.get(`${URL}/${word}`)
+        expect(response.text).to.eql(expected)
       })
     })
 

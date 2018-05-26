@@ -1,6 +1,6 @@
-const WordsManager = require('./../../lib/words_manager')
+const Model = require('./../../models/words')
 
-describe('Words Manager', function() {
+describe('Words Model', function() {
   describe('getArrayOfWords', function() {
     [
       { title: 'clear extra spaces', input: '    this is the best word counter    ever' },
@@ -8,8 +8,8 @@ describe('Words Manager', function() {
       { title: 'remove punctuation', input: 'this is the best word-counter ever!!!' }
     ].map(({ title, input }) => {
       it(title, function() {
-        const wordsManager = new WordsManager()
-        expect(wordsManager.getArrayOfWords(input))
+        const model = new Model()
+        expect(model.getArrayOfWords(input))
           .to.eql(['this', 'is', 'the', 'best', 'word', 'counter', 'ever'])
       })
     })
