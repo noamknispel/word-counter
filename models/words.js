@@ -10,12 +10,17 @@ module.exports = class WordsModel {
 
   async insert() {
     const data = typeFactory.getDataObject(this.input)
-    const toInsert = this.getArrayOfWords(await data.getContent())
+    await data.getContent(this.processData.bind(this))
+    // getContent() may throw error - error handling mechanism to be added here...
+  }
+
+  async processData(text) {
+    const toInsert = this.getArrayOfWords(text)
     await this.store.insert(toInsert)
   }
 
   getArrayOfWords(text) {
-    // I use lodash.words to get the string empty of any punctuation and extra spaces
+    // lodash.words return array with words empty of any punctuation and extra spaces
     return _.words(_.lowerCase(text))
   }
 

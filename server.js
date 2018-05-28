@@ -7,7 +7,7 @@ const bodyParser = require('koa-bodyparser')
 const apiRouter = require('./routers/apis')
 
 const app = new Koa()
-app.use(formidable())
+app.use(formidable({ maxFileSize: config.maxFileSize }))
 app.use(bodyParser())
 app.use(apiRouter())
 

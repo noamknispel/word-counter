@@ -1,11 +1,14 @@
 const UrlType = require('./../../../lib/types/url')
+const sinon = require('sinon')
 
 describe('URL', function() {
   describe('getContent', function() {
-    it('return content from URL', async function() {
+    it('call next with content from URL', async function() {
+      const next = sinon.spy()
       const url = new UrlType(config.testUrl)
-      const content = await url.getContent()
-      expect(content).to.be.a('string')
+      await url.getContent(next)
+
+      expect(next.getCall(0).args[0]).to.be.a('string')
     })
   })
 })
